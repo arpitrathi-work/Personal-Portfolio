@@ -1,13 +1,15 @@
 # Arpit Rathi · Meta Ads Specialist portfolio
 
 A one-page portfolio site whose main job is to get qualified visitors to **book a call**.
-It's plain HTML, CSS and JavaScript, so there is no build step and nothing to install.
+It's plain HTML, CSS and JavaScript with no build step. You don't need npm to edit or deploy it.
 
 ```
 index.html              ← all page content (edit copy here)
 assets/css/styles.css   ← colours, fonts, layout, animation
-assets/js/main.js       ← menu, scroll reveals, count-up, calculator, sticky mobile CTA
+assets/js/main.js       ← menu, smooth scroll, scroll animations, count-up, calculator, sticky mobile CTA
+assets/vendor/          ← GSAP, ScrollTrigger and Lenis browser builds (committed copies)
 assets/img/             ← favicon (SVG + PNG), apple-touch-icon, og-image.png (social preview)
+scripts/vendor.mjs      ← copies the libraries from node_modules into assets/vendor/
 .nojekyll               ← tells GitHub Pages to serve files as-is
 ```
 
@@ -21,6 +23,29 @@ python3 -m http.server 8000
 ```
 
 Then open http://localhost:8000. You can also double-click `index.html`, which works for most things.
+
+## Updating the animation libraries
+
+GSAP, ScrollTrigger and Lenis are **vendored**: the files in `assets/vendor/` are committed and
+loaded with relative `<script>` tags, so GitHub Pages serves them directly. `node_modules/` is
+ignored and never published. To update them:
+
+```bash
+npm install
+```
+```bash
+npm update gsap lenis
+```
+```bash
+npm run vendor
+```
+
+`npm run vendor` copies the browser builds into `assets/vendor/` (and strips source-map comments).
+Preview the site, check the scroll effects still work, then commit `assets/vendor/`,
+`package.json` and `package-lock.json` together.
+
+GSAP is free to use under its [standard license](https://gsap.com/standard-license). Lenis is MIT
+(see `assets/vendor/LICENSE-lenis.txt`).
 
 ## Editing content
 
@@ -85,6 +110,10 @@ Add the domain in **Settings → Pages → Custom domain**, then point a DNS `CN
 ## Accessibility and behaviour notes
 
 - Semantic sections and headings, a skip link, visible yellow focus rings, and native `<details>` for the FAQ and comparison table, so they work with the keyboard out of the box.
-- Animations turn off when the visitor's system has *Reduce motion* enabled. Counters then show their final values right away.
+- The page is fully visible without JavaScript. Only content below the first screen is faded in, and only by JavaScript once it has loaded.
+- There are three scroll moments: the hero illustration drifts slightly (desktop only), the case-study bars and numbers animate once, and the line joining the four steps draws in (wide screens only). Everything else is a short fade-up. Phones get lighter fades with no parallax.
+- Smooth scrolling (Lenis) runs only on desktop with a mouse or trackpad. Phones and touch devices keep native scrolling. In-page links still update the URL, so back/forward and shared `#section` links work, and keyboard focus moves to the section you jump to.
+- With *Reduce motion* turned on, there is no smooth scrolling and no animation. Counters show their final values right away.
+- The page is marked `noindex` (`<meta name="robots">` in `index.html`). Remove that tag when you want search engines to list it. There is no `robots.txt`.
 - Screen readers get the final case-study numbers instead of the animated ones.
 - The sticky mobile "Book a call" bar hides while the hero or contact booking button is on screen.

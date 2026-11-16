@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Arpit Rathi · Meta Ads Specialist for Coaches, Course Creators &amp; Clinics</title>
   <meta name="description" content="Arpit Rathi runs Meta ad campaigns for coaches, course creators and physiotherapy clinics in India and the US. Campaign setup, creative, testing and clear reporting. Book a strategy call.">
+  <meta name="robots" content="noindex">
   <meta name="theme-color" content="#0B1530">
   <meta name="color-scheme" content="dark light">
 
@@ -30,6 +31,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/vendor/lenis.css">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
@@ -206,7 +208,7 @@
               </div>
             </div>
             <p class="roas-badge"><span class="roas-num" data-count="4.06" data-decimals="2" data-suffix="x">4.06x</span><span>return on ad spend</span></p>
-            <button class="btn btn-ghost btn-sm" type="button" id="replay">
+            <button class="btn btn-ghost btn-sm" type="button" id="replay" hidden>
               <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v5h5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               Replay animation
             </button>
@@ -331,7 +333,7 @@
 
         <details class="compare reveal">
           <summary>Compare all features</summary>
-          <div class="table-wrap" tabindex="0" role="region" aria-label="Package comparison table, scrolls horizontally">
+          <div class="table-wrap" data-lenis-prevent tabindex="0" role="region" aria-label="Package comparison table, scrolls horizontally">
             <table>
               <caption class="visually-hidden">Feature comparison of Starter, Growth and Scale packages</caption>
               <thead>
@@ -489,6 +491,10 @@
     <a class="btn btn-primary" href="https://calendly.com/work-arpit0512/business-growth-strategy" target="_blank" rel="noopener">Book a call<span class="visually-hidden"> (opens in a new tab)</span></a>
   </div>
 
+  <!-- Animation libraries (vendored, see README). The page works fully without them. -->
+  <script src="assets/vendor/gsap.min.js" defer></script>
+  <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="assets/vendor/lenis.min.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
